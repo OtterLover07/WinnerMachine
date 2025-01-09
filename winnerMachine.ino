@@ -11,9 +11,13 @@
 #include <Adafruit_GFX.h>
 
 // Init constants
-const String winners[10]{ "Trazan o Banarne", "Bolibompadraken", "Dr Snuggles", "Johan Glans", "Robin Almström", "Bamse", "Fantomen", "Batman", "Donald J. Trump", "Mario och Luigi" };
+const String people[13]{"Gargamel", "Bolibompadraken", "Dr Doofenschmirtz", "Musse Pigg", "Snurre Sprätt", "Bamse", "Hulken", "Batman", "Donald J. Trump", "Donkey Kong", "Waluigi", "Mr. Bean", "Perry the Platypus"};
+const String contests[10]{"Schack", "Monopol", "Kubb", "Ett Maraton", "Kurragömma", "Längdhopp", "Paintball", "Stirrtävling", "Korvätning", "Boxning"};
 
 // Init global variables
+int charVotes[13]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+int tempVotes[2]{0, 0};
+int contest[3]{0, 0, 0};
 
 // construct objects
 RTC_DS3231 rtc;
@@ -34,7 +38,7 @@ void loop() {
 }
 
 void onAlarm() {
-  Serial.println(winners[random(0, 9)]);
+  Serial.println(winners[random(0, 12)]);
 }
 
 void setAlarm() {
