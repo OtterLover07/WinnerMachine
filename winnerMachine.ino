@@ -10,13 +10,11 @@
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_HX8357.h>
-// #include <U8g2_for_Adafruit_GFX.h> //U8g2-addon
-// #include <u8g2_fonts.h> //U8g2-addon
 
 // Init constants
 // "åäö" = "<=>"
-const String winners[] {"Gargamel", "Bolibompadraken", "Dr Doofenshmirtz", "Musse Pigg", "Snurre Spr=tt", "Bamse", "Hulken", "Batman", "Donald J. Trump", "Donkey Kong", "Waluigi", "Mr. Bean", "Perry the Platypus"};
-const String contests[] {"Schack", "Monopol", "Kubb", "Ett Maraton", "Kurrag>mma", "Längdhopp", "Paintball", "Stirrt=vling", "Korv=tning", "Boxning"};
+const String winners[13] {"Gargamel", "Bolibompadraken", "Dr Doofenshmirtz", "Musse Pigg", "Snurre Spr=tt", "Bamse", "Hulken", "Batman", "Donald J. Trump", "Donkey Kong", "Waluigi", "Mr. Bean", "Perry the Platypus"};
+const String contests[10] {"Schack", "Monopol", "Kubb", "Ett Maraton", "Kurrag>mma", "Längdhopp", "Paintball", "Stirrt=vling", "Korv=tning", "Boxning"};
 
 // Init global variables
 int charVotes[13]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -32,8 +30,6 @@ RTC_DS3231 rtc;
 #define TFT_RST 8
 
 Adafruit_HX8357 tft = Adafruit_HX8357(TFT_CS, TFT_DC, TFT_RST);
-// U8G2_FOR_ADAFRUIT_GFX u8g; //U8g2-addon
-
 
 void setup() {
   // init communication
@@ -45,19 +41,34 @@ void setup() {
   lcdSetup();
 
   Serial.println("Setup Complete!");
+  newContest();
 }
 
 void loop() {
-  checkAlarm();
+  
 }
 
 void newContest(){
-  blabla
+  String temp = "";
+  tft.fillScreen(HX8357_BLACK);
+  tft.setCursor(50, 30);  tft.setTextSize(6);  tft.setTextColor(HX8357_MAGENTA);
+  tft.print(F("Vem Vinner?"));
+  temp = winners[random(0, 12)];
+  tft.setCursor(centerText(temp), 110);  tft.setTextSize(3);  tft.setTextColor(HX8357_WHITE);
+  tft.print(temp);
 }
 
 void onAlarm() {
-  newContest();
   Serial.println("Alarm!");
+}
+
+int centerText(String text){
+  int x;
+  int y;
+  unsigned int w;
+  unsigned int h;
+  tft.getTextBounds(text, 0, 0, &x, &y, &w, &h);
+  return((480-w)/2);
 }
 
 void checkAlarm() {
