@@ -15,13 +15,15 @@
 #include <Adafruit_HX8357.h>
 
 // Init constants
+const int winnerAmount = 13
+const int contestAmount = 10
 // "åäö" = "<=>"
-const String winners[13]{ "Gargamel", "Bolibompadraken", "Dr Doofenshmirtz", "Musse Pigg", "Snurre Spr=tt", "Bamse", "Hulken", "Batman", "Donald J. Trump", "Donkey Kong", "Waluigi", "Mr. Bean", "Perry the Platypus" };
-const String contests[10]{ "Schack", "Monopol", "Kubb", "Ett Maraton", "Kurrag>mma", "L=ngdhopp", "Paintball", "Stirrt=vling", "Korv=tning", "Boxning" };
+const String winners[winnerAmount]{ "Gargamel", "Bolibompadraken", "Dr Doofenshmirtz", "Musse Pigg", "Snurre Spr=tt", "Bamse", "Hulken", "Batman", "Donald J. Trump", "Donkey Kong", "Waluigi", "Mr. Bean", "Perry the Platypus" };
+const String contests[contestAmount]{ "Schack", "Monopol", "Kubb", "Ett Maraton", "Kurrag>mma", "L=ngdhopp", "Paintball", "Stirrt=vling", "Korv=tning", "Boxning" };
 const int vote1 = 6, vote2 = 7;
 
 // Init global variables
-int charVotes[13]{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+int charVotes[winnerAmount]{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 int tempVotes[2]{ 0, 0 };
 int current[3]{ 0, 0, 0 };
 bool contestActive = false;
@@ -118,11 +120,11 @@ void finishContest() {
 
 void newContest() {
   // Randomize contestants and contest
-  int temp1 = random(0, 12);
-  int temp2 = random(0, 12);
-  int temp3 = random(0, 9);
+  int temp1 = random(0, winnnerAmount -1);
+  int temp2 = random(0, winnerAmount -1);
+  int temp3 = random(0, contestAmount -1);
   while (temp2 == temp1) {  // Make sure a contestant is not fighting themself
-    temp1 = random(0, 12);
+    temp1 = random(0, winnerAmount -1);
   }
   current[0] = temp1;
   current[1] = temp2;
