@@ -62,6 +62,7 @@ void setup() {
   Serial.println(F("Setup Complete!"));
   tft.setCursor(0, 0);
   tft.println(F("Setup Complete!"));
+  
   // Funny loading bar
   delay(1000);
   tft.println("");

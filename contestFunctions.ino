@@ -1,3 +1,15 @@
+/*
+* Contest Functions
+* The big functions that contain the bulk of the program code.
+* These mostly consist of displaying the information on the TFT display.
+*/
+
+/*
+* This function begins a new contest by first randomizing contestants and the contest itself.
+* It then displays it on the screen.
+* Parameters: Void
+* Returns: Void
+*/
 void beginContest() {
   // Randomize contestants and contest
   int temp1 = random(0, winnerAmount -1);
@@ -16,6 +28,14 @@ void beginContest() {
   Serial.println(F("Contest Begun"));
 }
 
+/*
+* This function determines who won the contest by comparing the votes.
+* It then displays the winner along with the total vote tally on the screen.
+* It also logs the votes to the [charVotes] array, and resets [tempVotes].
+* It also attempts to write data to the SD-card (DEACTIVATED).
+* Parameters: Void
+* Returns: Void
+*/
 void finishContest() {
   String winner;
   // Determine who won and set text color and string accordingly
@@ -30,9 +50,9 @@ void finishContest() {
     tft.setTextColor(HX8357_MAGENTA);
   }
 
+  // Display it all
   int y = 5;
   String tempString;
-  // Display Stuff
   tft.fillScreen(HX8357_BLACK);
   tft.setTextSize(6); 
   tft.setCursor(centerText(winner), y); 
@@ -66,9 +86,13 @@ void finishContest() {
   Serial.println(F("Contest Finished"));
 }
 
+/*
+* This function displays the current contest on the screen, as defined by [current].
+* Parameters: Void
+* Returns: Void
+*/
 void displayContest() {
   int y = 15;
-  delay(500);
   tft.fillScreen(HX8357_BLACK);
   tft.setTextSize(7); tft.setTextColor(HX8357_MAGENTA);
   tft.setCursor(centerText(F("Vem Vinner?")), y);   y += 75;
