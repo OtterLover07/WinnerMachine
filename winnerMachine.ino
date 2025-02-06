@@ -19,14 +19,14 @@
 // #include <SD.h>
 
 // Init constants
-const int winnerAmount = 13;
-const int contestAmount = 10;
+const int winnerAmount = 14;
+const int contestAmount = 11;
 // const int chipSelect = 4;
 
 // Init master arrays
 // "åäö" = "<=>"
-const String winners[winnerAmount]{ "Gargamel", "Bolibompadraken", "Dr Doofenshmirtz", "Musse Pigg", "Snurre Spr=tt", "Bamse", "Hulken", "Batman", "Donald J. Trump", "Donkey Kong", "Waluigi", "Mr. Bean", "Perry the Platypus" };
-const String contests[contestAmount]{ "Schack", "Monopol", "Kubb", "Ett Maraton", "Kurrag>mma", "L=ngdhopp", "Paintball", "Stirrt=vling", "Korv=tning", "Boxning" };
+const String winners[winnerAmount]{ "Gargamel", "Bolibompadraken", "Dr Doofenshmirtz", "Musse Pigg", "Snurre Spr=tt", "Bamse", "Hulken", "Batman", "Donald J. Trump", "Donkey Kong", "Waluigi", "Mr. Bean", "Perry the Platypus", "Stalin" };
+const String contests[contestAmount]{ "Schack", "Monopol", "Kubb", "Ett Maraton", "Kurrag>mma", "L=ngdhopp", "Paintball", "Stirrt=vling", "Korv=tning", "Boxning", "Presidentval" };
 const int vote1 = 6, vote2 = 7;
 
 // Init global variables
@@ -62,7 +62,7 @@ void setup() {
   Serial.println(F("Setup Complete!"));
   tft.setCursor(0, 0);
   tft.println(F("Setup Complete!"));
-  
+
   // Funny loading bar
   delay(1000);
   tft.println("");
