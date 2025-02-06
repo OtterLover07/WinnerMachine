@@ -60,7 +60,7 @@ void finishContest() {
     tempVotes[i] = 0;
   }
   // Log total vote tally to microSD
-  SDWrite();
+  // SDWrite();
 
   contestActive = false;
   Serial.println(F("Contest Finished"));
@@ -68,6 +68,7 @@ void finishContest() {
 
 void displayContest() {
   int y = 15;
+  delay(500);
   tft.fillScreen(HX8357_BLACK);
   tft.setTextSize(7); tft.setTextColor(HX8357_MAGENTA);
   tft.setCursor(centerText(F("Vem Vinner?")), y);   y += 75;

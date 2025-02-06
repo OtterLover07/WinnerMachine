@@ -62,49 +62,6 @@ void checkAlarm() {
   }
 }
 
-void SDSetup() {
-  Serial.print("Initializing SD card...");
-
-  if (!SD.begin(chipSelect)) {
-    Serial.println("initialization failed. Things to check:");
-    Serial.println("1. is a card inserted?");
-    Serial.println("2. is your wiring correct?");
-    Serial.println("3. did you change the chipSelect pin to match your shield or module?");
-    Serial.println("Note: press reset button on the board and reopen this Serial Monitor after fixing your issue!");
-    while (true);
-  }
-
-  Serial.println("initialization done.");
-}
-
-void SDWrite() {
-  String dataString = "";
-
-  // read three sensors and append to the string:
-  for (int i = 0; i < winnerAmount; i++) {
-    dataString += String(charVotes[i]);
-    if (i < (winnerAmount - 1)) {
-      dataString += ",";
-    }
-  }
-
-  // open the file. note that only one file can be open at a time,
-  // so you have to close this one before opening another.
-  File dataFile = SD.open("datalog.txt", FILE_WRITE);
-
-  // if the file is available, write to it:
-  if (dataFile) {
-    dataFile.println(dataString);
-    dataFile.close();
-    // print to the serial port too:
-    Serial.println(dataString);
-  }
-  // if the file isn't open, pop up an error:
-  else {
-    Serial.println("error opening datalog.txt");
-  }
-}
-
 // More or less stolen from alarm example in RTClib
 void rtcSetup() {
   Serial.println("Initiate RTC Setup...");
@@ -125,5 +82,49 @@ void rtcSetup() {
   rtc.clearAlarm(2);
   rtc.writeSqwPinMode(DS3231_OFF);
   rtc.disableAlarm(2);
-  rtc.setAlarm1(rtc.now() + TimeSpan(0, 0, 1, 0), DS3231_A1_Second);
+  rtc.setAlarm1(rtc.now() + TimeSpan(0, 0, 1, 0), DS3231_A1_Minute);
 }
+
+// void SDSetup() {
+//   Serial.print("Initializing SD card...");
+
+//   if (!SD.begin(chipSelect)) {
+//     Serial.println("initialization failed. Things to check:");
+//     Serial.println("1. is a card inserted?");
+//     Serial.println("2. is your wiring correct?");
+//     Serial.println("3. did you change the chipSelect pin to match your shield or module?");
+//     Serial.println("Note: press reset button on the board and reopen this Serial Monitor after fixing your issue!");
+//     while (true);
+//   }
+
+//   Serial.println("initialization done.");
+// }
+
+// void SDWrite() {
+//   String dataString = "";
+
+//   // read three sensors and append to the string:
+//   for (int i = 0; i < winnerAmount; i++) {
+//     dataString += String(charVotes[i]);
+//     if (i < (winnerAmount - 1)) {
+//       dataString += ",";
+//     }
+//   }
+//   delay(500);
+
+//   // open the file. note that only one file can be open at a time,
+//   // so you have to close this one before opening another.
+//   File dataFile = SD.open("datalog.txt", FILE_WRITE);
+
+//   // if the file is available, write to it:
+//   if (dataFile) {
+//     dataFile.println(dataString);
+//     dataFile.close();
+//     // print to the serial port too:
+//     Serial.println(dataString);
+//   }
+//   // if the file isn't open, pop up an error:
+//   else {
+//     Serial.println("error opening datalog.txt");
+//   }
+// }

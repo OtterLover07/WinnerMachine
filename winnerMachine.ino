@@ -7,18 +7,23 @@
 * Then collects votes from buttons during the day, and selects a winner based on the votes at the end of the day.
 */
 
+// SD stuff didn't work, keeping in case I want to try to fix it later.
+
 // Include Libraries
 #include <RTClib.h>
-#include <SD.h>
 #include <Wire.h>
 #include <Adafruit_BusIO_Register.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_HX8357.h>
+// #include <SPI.h>
+// #include <SD.h>
 
 // Init constants
 const int winnerAmount = 13;
 const int contestAmount = 10;
-const int chipSelect = 8;
+// const int chipSelect = 4;
+
+// Init master arrays
 // "åäö" = "<=>"
 const String winners[winnerAmount]{ "Gargamel", "Bolibompadraken", "Dr Doofenshmirtz", "Musse Pigg", "Snurre Spr=tt", "Bamse", "Hulken", "Batman", "Donald J. Trump", "Donkey Kong", "Waluigi", "Mr. Bean", "Perry the Platypus" };
 const String contests[contestAmount]{ "Schack", "Monopol", "Kubb", "Ett Maraton", "Kurrag>mma", "L=ngdhopp", "Paintball", "Stirrt=vling", "Korv=tning", "Boxning" };
@@ -45,7 +50,7 @@ void setup() {
   Serial.begin(9600);
 
   // Init Hardware
-  SDSetup();
+  // SDSetup();
   pinMode(vote1, INPUT_PULLUP);
   pinMode(vote2, INPUT_PULLUP);
   randomSeed(analogRead(A0));
